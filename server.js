@@ -71,6 +71,29 @@ app.post('/api/albums', function create(req, res) {
   });
 
 });
+
+
+app.put('/api/albums/:id',function(req,res){
+
+  Album.findById(req.params, function(err, album){
+
+    if (err)
+      res.send(err);
+    album.name = req.body.name;
+
+
+    album.save(function(err){
+      if (err)
+        res.send(err);
+
+      res.json({message: 'Its updated'});
+
+
+    });
+
+  });
+
+});
 /**********
  * SERVER *
  **********/
