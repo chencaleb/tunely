@@ -45,6 +45,10 @@ app.get('/', function homepage (req, res) {
   res.render('index');
 });
 
+app.get('/api/genres', function genrespage (req, res) {
+  res.render('genres');
+});
+
 /*
  * JSON API Endpoints
  */
