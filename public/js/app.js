@@ -41,6 +41,7 @@ $(document).ready(function() {
 
   //ajax get method
   $.get('/api/albums').success(function (albums) {
+    console.log(albums);
     albums.forEach(function(album) {
       renderAlbum(album);
     });
@@ -65,15 +66,35 @@ $(document).ready(function() {
     $("form").trigger("reset");
   });
 
+  //on click, the delete button will run the delete function
+  $('#albums').on('click', '.delete-album', DeleteAlbum);
+
+
 });
 
+//This function deletes album
+function DeleteAlbum(e) {
+//this grabs the album id from the hard-coded html
+  var albumId = $(this).parents('.album').data('album-id');
+  console.log('deleting album with id =' + albumId );
+//jquery does not have a delete method, so we just use ajax
+  $.ajax({
+    method: 'DELETE',
+    url: ('/api/albums/' + albumId),
+    success: function() {
+      console.log("just deleted album");
+      //concatenates the album ID to grab the html data for specific album
+      $('[data-album-id='+ albumId + ']').remove();
+    }
+  });
+}
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {
   console.log('rendering album:', album);
 
   var albumHtml =
   "        <!-- one album -->" +
-  "        <div class='row album' data-album-id='" + "HARDCODED ALBUM ID" + "'>" +
+  "        <div class='row album' data-album-id='" + album._id + "'>" +
   "          <div class='col-md-10 col-md-offset-1'>" +
   "            <div class='panel panel-default'>" +
   "              <div class='panel-body'>" +
@@ -86,15 +107,15 @@ function renderAlbum(album) {
   "                    <ul class='list-group'>" +
   "                      <li class='list-group-item'>" +
   "                        <h4 class='inline-header'>Album Name:</h4>" +
-  "                        <span class='album-name'>" + "HARDCODED ALBUM NAME" + "</span>" +
+  "                        <span class='album-name'>" + album.name + "</span>" +
   "                      </li>" +
   "                      <li class='list-group-item'>" +
   "                        <h4 class='inline-header'>Artist Name:</h4>" +
-  "                        <span class='artist-name'>" + "HARDCODED ARTIST NAME" + "</span>" +
+  "                        <span class='artist-name'>" + album.artistName + "</span>" +
   "                      </li>" +
   "                      <li class='list-group-item'>" +
   "                        <h4 class='inline-header'>Released date:</h4>" +
-  "                        <span class='album-releaseDate'>" + "HARDCODED RELEASE DATE" + "</span>" +
+  "                        <span class='album-name'>" + album.releaseDate + "</span>" +
   "                      </li>" +
   "                    </ul>" +
   "                  </div>" +
@@ -104,6 +125,7 @@ function renderAlbum(album) {
   "              </div>" + // end of panel-body
 
   "              <div class='panel-footer'>" +
+  "                <button class='btn btn-danger delete-album'>Delete Album</button>" +
   "              </div>" +
 
   "            </div>" +
