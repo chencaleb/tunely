@@ -72,6 +72,54 @@ $(document).ready(function() {
 
 });
 
+
+// UPDATE function
+
+
+function handleEditAlbumClick(e) {
+  var albumId = $(this).parents('.album').data('album-id');
+  var $albumRow = getAlbumRowById(albumId);
+
+  console.log('attempt to edit id', albumId);
+
+  // replace edit button with save button
+  $(this).parent().find('.btn').hide();
+  $(this).parent().find('.default-hidden').show();
+
+  // replace current spans with inputs
+  var albumName = $albumRow.find('span.album-name').text();
+  $albumRow.find('span.album-name').html('<input class="edit-album-name" value="' + albumName + '"></input>');
+
+  var artistName = $albumRow.find('span.artist-name').text();
+  $albumRow.find('span.artist-name').html('<input class="edit-artist-name" value="' + artistName + '"></input>');
+
+  var releaseDate = $albumRow.find('span.album-release-date').text();
+  $albumRow.find('span.album-release-date').html('<input class="edit-album-release-date" value="' + releaseDate + '"></input>');
+}
+
+function handleSaveChangesClick(e) {
+  var albumId = $(this).parents('.album').data('album-id');
+  var $albumRow = getAlbumRowById(albumId);
+
+  var data = {
+    name: $albumRow.find('.edit-album-name').val(),
+    artistName: $albumRow.find('.edit-artist-name').val(),
+    releaseDate: $albumRow.find('.edit-album-release-date').val()
+  };
+
+  $.ajax({
+    method: 'PUT',
+    url: '/api/albums/' + albumId,
+    data: data,
+    success: function(data) {
+      console.log(data);
+      $albumRow.replaceWith(generateAlbumHtml(data));
+    }
+  });
+}
+
+
+
 //This function deletes album
 function DeleteAlbum(e) {
 //this grabs the album id from the hard-coded html
@@ -117,7 +165,7 @@ function renderAlbum(album) {
   "                        <h4 class='inline-header'>Released date:</h4>" +
   "                        <span class='album-name'>" + album.releaseDate + "</span>" +
   "                      </li>" +
-  "                    </ul>" +
+  "                    </ul>" + 
   "                  </div>" +
   "                </div>" +
   "                <!-- end of album internal row -->" +
@@ -126,6 +174,8 @@ function renderAlbum(album) {
 
   "              <div class='panel-footer'>" +
   "                <button class='btn btn-danger delete-album'>Delete Album</button>" +
+  "                <button class='btn btn-info edit-album'>Edit Album</button>" +
+
   "              </div>" +
 
   "            </div>" +
