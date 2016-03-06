@@ -91,27 +91,30 @@ app.post('/api/albums', function create(req, res) {
 
 // UPDATE//
 
-app.get('/api/edit',function(req,res){
 
-  // Album.findById(req.params, function(err, album){
+app.put('/api/albums/:id', function updateAlbum(req, res) {
+  console.log('updating id ', req.params.id);
+  console.log('received body ', req.body);
 
-  //   if (err)
-  //     res.send(err);
-  //   album.name = req.body.name;
-
-
-  //   album.save(function(err){
-  //     if (err)
-  //       res.send(err);
-
-      res.render('edit');
-
-
-    // });
-
-  // });
-
+  db.Album.findOne({_id: req.params.id}, function(err, Album) {
+    if (err) { console.log('error', err); }
+    //artistname needed to be adjusted here
+    Album.artistName = req.body.artistName;
+    Album.name = req.body.name;
+    Album.releaseDate = req.body.releaseDate;
+    Album.save(function(err, saved) {
+      if(err) { console.log('error', err); }
+      res.json(saved);
+    });
+  });
 });
+
+
+
+
+
+
+
 
 //delete 
 app.delete('/api/albums/:id', function deleteAlbum(req, res) {

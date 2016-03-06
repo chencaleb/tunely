@@ -69,14 +69,30 @@ $(document).ready(function() {
   //on click, the delete button will run the delete function
   $('#albums').on('click', '.delete-album', DeleteAlbum);
 
+  $('#albums').on('click', '.edit-album', EditAlbum);
+
+  $('#albums').on('click', '.put-album', SaveChanges);
+
+
+
 
 });
 
 
 // UPDATE function
 
+function getAlbumRowById(id) {
+  return $('[data-album-id=' + id + ']');
+}
 
-function handleEditAlbumClick(e) {
+
+
+
+
+
+
+
+function EditAlbum(e) {
   var albumId = $(this).parents('.album').data('album-id');
   var $albumRow = getAlbumRowById(albumId);
 
@@ -97,7 +113,9 @@ function handleEditAlbumClick(e) {
   $albumRow.find('span.album-release-date').html('<input class="edit-album-release-date" value="' + releaseDate + '"></input>');
 }
 
-function handleSaveChangesClick(e) {
+
+
+function SaveChanges(e) {
   var albumId = $(this).parents('.album').data('album-id');
   var $albumRow = getAlbumRowById(albumId);
 
@@ -116,6 +134,9 @@ function handleSaveChangesClick(e) {
       $albumRow.replaceWith(generateAlbumHtml(data));
     }
   });
+
+    window.location.href = '/';
+
 }
 
 
@@ -163,7 +184,8 @@ function renderAlbum(album) {
   "                      </li>" +
   "                      <li class='list-group-item'>" +
   "                        <h4 class='inline-header'>Released date:</h4>" +
-  "                        <span class='album-name'>" + album.releaseDate + "</span>" +
+                            // made adjustments here renamed it to album-release-date not album-name
+  "                        <span class='album-release-date'>" + album.releaseDate + "</span>" +
   "                      </li>" +
   "                    </ul>" + 
   "                  </div>" +
@@ -173,8 +195,9 @@ function renderAlbum(album) {
   "              </div>" + // end of panel-body
 
   "              <div class='panel-footer'>" +
-  "                <button class='btn btn-danger delete-album'>Delete Album</button>" +
   "                <button class='btn btn-info edit-album'>Edit Album</button>" +
+  "                <button class='btn btn-success put-album default-hidden'>Save Changes</button>" +
+  "                <button class='btn btn-danger delete-album'>Delete Album</button>" +
 
   "              </div>" +
 

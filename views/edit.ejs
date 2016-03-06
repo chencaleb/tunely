@@ -21,15 +21,15 @@
     <div class="jumbotron">
 
    <!--    Start Form -->
-     <section id='album-form' class="container">
+     <section id='new-form' class="container">
       <div class="row">
       <div class="col-md-10 col-md-offset-1">
 
-        <form method="post" action="/api/albums" class="form-horizontal">
+        <form method="put" action="/api/edit/:id" class="form-horizontal">
           <fieldset>
 
             <!-- Form Name -->
-            <legend>Add New Album</legend>
+            <legend>Edit Album</legend>
 
             <!-- Text input-->
             <div class="form-group">
@@ -71,7 +71,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="singlebutton">Save Album</label>
               <div class="col-md-4">
-                <button id="singlebutton" class="btn btn-primary" name="singlebutton">Submit</button>
+                <button id="updating" onclick="updateButtonID()" type="submit" class="btn btn-primary" name="singlebutton">Submit</button>
               </div>
             </div>
           </fieldset>
