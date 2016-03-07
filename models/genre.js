@@ -6,11 +6,14 @@ var AlbumSchema = new Schema({
     artistName: String,
     name: String,
     releaseDate: String,
+    coverImage: String,
     genres: [String]
 });
 
 var GenreSchema = new Schema({
  name: String,
+ coverImage: String,
+
  albums: [AlbumSchema]
 });
 

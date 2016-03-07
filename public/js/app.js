@@ -287,10 +287,7 @@ function renderAlbum(album) {
   "                        <h4 class='inline-header'>Released date:</h4>" +
   "                        <span class='album-release-date'>" + album.releaseDate + "</span>" +
   "                      </li>" +
-  // "                      <li class='list-group-item'>" +
-  // "                        <h4 class='inline-header'>Cover Image:</h4>" +
-  // "                        <span class='cover-image'>" + album.coverImage + "</span>" +
-  // "                      </li>" +
+ 
   "                    </ul>" +
   "                  </div>" +
   "                </div>" +
@@ -321,7 +318,7 @@ function renderGenre(genre){
   "              <!-- begin genre internal row -->" +
   "                <div class='row'>" +
   "                  <div class='col-md-3 col-xs-12 thumbnail genre-art'>" +
-  "                     <img src='" + "http://placehold.it/400x400'" +  " alt='genre image'>" +
+  "                     <img src='" + genre.coverImage + "' alt='genre image'>" +
   "                  </div>" +
   "                  <div class='col-md-9 col-xs-12'>" +
   "                    <ul class='list-group'>" +

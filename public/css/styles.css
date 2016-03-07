@@ -1,9 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Play');
+/*@import url('vapor.ttf');*/
+
+body {
+
+  font-family: 'Play';
+}
+
+
 .jumbotron {
-  background-image: url(/images/vapor1.png);
+  background-color: #CE869B;
   background-size: cover;
   background-repeat: no-repeat;
   color: #EEE;
   margin: -20px;
+  position: relative;
 }
 
 .jumbotron .container {
@@ -17,18 +27,43 @@
 }
 
 @font-face {
-  font-family: 'vapor';
-  src: url('fonts/vapor.ttf'); 
+  font-family: vapor;
+  src: url('/fonts/vapor.ttf'); 
 }
 
-.vaporfont {
-  font-family: 'vapor';
+
+.btn-color {
+  background-color: #C5BCB0;
 }
 
 .btn-color {
   background-color: #C5BCB0;
 }
 
+
+.legend2 {
+    font-family: vapor;
+    font-size: 40px;
+    font-weight: bold;
+   
+}
+
+.vaporfont {
+margin-top: 70px;
+font-size: 50px; 
+font-weight: bold;
+font-family: vapor;
+
+}
+
+.aFonts {
+
+  font-size: 20px;
+}    
+
+.aFonts {
+
+  font-size: 20px;
 
 /*---- Splash Style ----*/
 
@@ -81,6 +116,51 @@
  border-color: #5AFFF7;
 }
 
+.statue {
+
+  top: 166px;
+  left: 815px;
+  position: absolute;
+}
+
+.statue2{
+
+  top: -55px;
+  left: 946px;
+  position: absolute;
+}
+
+.mainbtn {
+  background-color: limegreen;
+  font-size: 20px;
+/*
+  background-image: url('/images/tape.jpg');
+  background-size: 80px 60px;*/
+/*  padding: 19px 17px;
+*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
 .navbar-brand {
 	padding: 0px;
 	padding-left: 10px;
@@ -90,3 +170,4 @@
 .navbar-brand > img {
 	height: 32px;
 }
+>>>>>>> master
