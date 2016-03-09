@@ -10,18 +10,21 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 var ejs = require('ejs');
+var expressSession = require('express-session');
+var cookieParser = require("cookie-parser");
+var logger = require('morgan');
+// mongoose.connect('mongodb://localhost:27017/facebook-authentication-app');
+var passport = require("./config/passport");
 
-//user bodyParser
+app.use(cookieParser());
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// serve static files from public folder
 app.use(express.static(__dirname + '/public'));
-
-//app setup
 app.use(methodOverride('_method'));
-
-//views
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs').renderFile);
@@ -40,6 +43,26 @@ var db = require("./models");
 /*
  * HTML Endpoints
  */
+
+//facebook oauth
+app.get('/', function(req, res){
+  res.render('layout', {user: req.user});
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'} ));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/api'
+  })
+);
+
+app.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/");
+});
+
 
 //render album index page
 app.get('/', function homepage (req, res) {
