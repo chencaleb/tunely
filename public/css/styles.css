@@ -31,18 +31,6 @@ body {
   src: url('/fonts/vapor.ttf'); 
 }
 
-.btn-color {
-
-  background-color: #C5BCB0;
-}
-
-
-.btn-color {
-
-  background-color: #C5BCB0;
-}
-
-
 .legend2 {
     font-family: vapor;
     font-size: 40px;
@@ -55,27 +43,67 @@ margin-top: 70px;
 font-size: 50px; 
 font-weight: bold;
 font-family: vapor;
+}
 
+.btn-color {
+
+  background-color: #C5BCB0;
 }
 
 .aFonts {
 
   font-size: 20px;
-}    
+}
+/*---- Splash Style ----*/
 
-.aFonts {
+.splash-title {
+  color: white;
+  font-size: 3em;
+  margin-top: 100px;
+  text-shadow: 0 2px 10px #000;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+}
 
-  font-size: 20px;
+.splash{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background-color:#252525;
+  background-repeat:no-repeat;
+  text-align:center;
+  z-index: 100;
+}
+
+#vinyl {
+  width: 300px;
+  margin-top: 50px;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to { 
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.rotate:hover {
+    -webkit-animation-name: rotate; 
+    -webkit-animation-duration: 1.3s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    cursor: pointer;
 }
 
 .container-fluid {
  background-color: #5AFFF7;
  border-color: #5AFFF7;
 }
-
-
-
-
 
 .statue {
 
@@ -102,22 +130,12 @@ font-family: vapor;
 }
 
 
+.navbar-brand {
+	padding: 0px;
+	padding-left: 10px;
+	padding-top: 8px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.navbar-brand > img {
+	height: 32px;
+}
